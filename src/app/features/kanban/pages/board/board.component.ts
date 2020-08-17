@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { Platform } from '@angular/cdk/platform';
 import { CandidateService } from '../../services';
 import { Candidate, Pipeline } from '../../models';
 
@@ -10,12 +12,15 @@ import { Candidate, Pipeline } from '../../models';
 export class BoardComponent implements OnInit {
   candidates: Candidate[];
   pipelines: Pipeline[] = [];
+  isMobile = false;
 
   constructor(
-    private candidateService: CandidateService
+    private candidateService: CandidateService,
+    private platform: Platform
   ) { }
 
   ngOnInit(): void {
+    this.isMobile = this.platform.ANDROID || this.platform.IOS;
     this.fetchCandidates();
   }
 
@@ -46,6 +51,14 @@ export class BoardComponent implements OnInit {
         candidates: candidatesForType
       };
     });
+  }
+
+  dropCandidate(event: CdkDragDrop<Candidate[]>): void {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
+    }
   }
 
 }

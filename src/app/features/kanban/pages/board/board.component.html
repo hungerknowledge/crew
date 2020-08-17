@@ -1,5 +1,10 @@
-<div class="pipeline__container" [ngStyle]="{ 'grid-template-columns': 'repeat(' + pipelines.length + ', 370px)' }">
-    <app-pipeline *ngFor="let pipeline of pipelines" [title]="pipeline.title">
-        <app-candidate *ngFor="let candidate of pipeline.candidates" [candidate]="candidate"></app-candidate>
+<div class="pipeline__container" cdkDropListGroup [ngStyle]="{ 'grid-template-columns': !isMobile ? 'repeat(' + pipelines.length + ', 370px)' : 'repeat(' + pipelines.length + ', 280px)' }">
+    <app-pipeline 
+    cdkDropList 
+    *ngFor="let pipeline of pipelines" 
+    [cdkDropListData]="pipeline.candidates" 
+    [title]="pipeline.title"
+    (cdkDropListDropped)="dropCandidate($event)">
+        <app-candidate *ngFor="let candidate of pipeline.candidates" cdkDrag [candidate]="candidate"></app-candidate>
     </app-pipeline>
 </div>

@@ -6,6 +6,7 @@
     border-radius: 8px;
     cursor: pointer;
     display: flex;
+    flex-direction: column;
     margin-bottom: 16px;
     padding-bottom: 8px;
     padding-left: 16px;
@@ -22,25 +23,26 @@
     align-items: center;
     display: flex;
     justify-content: center;
-    padding-right: 16px;
+    padding-right: 0;
+    padding-bottom: 8px;
 }
 
 .candidate__picture .picture__container {
     align-items: center;
     background-color:  var(--color-border);
     border-radius: 100%;
-    height: 64px;
+    height: 48px;
     display: flex;
     justify-content: center;
     opacity: 0.8;
     overflow: hidden;
-    width: 64px;
+    width: 48px;
 }
 
-.candidate__picture  .picture--placeholder {
-    height: 32px;
+.candidate__picture .picture--placeholder {
+    height: 24px;
     opacity: 0.2;
-    width: 32px;
+    width: 24px;
 }
 
 .candidate__profile span {
@@ -59,8 +61,18 @@
     font-weight: 600;
 }
 
+.candidate__profile .profile__name,
+.candidate__profile .profile__job {
+    text-align: center;
+}
+
 .candidate__profile .profile__job {
     font-size: var(--font-size-small);
+}
+
+.candidate__profile .profile__social,
+.candidate__profile .profile__tags {
+    display: none;
 }
 
 .candidate__profile .profile__social button {
@@ -110,4 +122,35 @@
     padding-right: 8px;
     padding-top: 4px;
     text-transform: uppercase;
+}
+
+@media (min-width: 768px) {
+    .candidate {
+        flex-direction: row;
+    }
+
+    .candidate__picture .picture__container {
+        height: 64px;
+        width: 64px;
+    }
+
+    .candidate__picture .picture--placeholder {
+        height: 32px;
+        width: 32px;
+    }
+
+    .candidate__picture {
+        padding-bottom: 0;
+        padding-right: 16px;
+    }
+
+    .candidate__profile .profile__name,
+    .candidate__profile .profile__job {
+        text-align: left;
+    }
+
+    .candidate__profile .profile__social,
+    .candidate__profile .profile__tags {
+        display: block;
+    }    
 }
