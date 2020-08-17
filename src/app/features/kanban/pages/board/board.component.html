@@ -1,1 +1,5 @@
-<p>board works!</p>
+<div class="pipeline__container" [ngStyle]="{ 'grid-template-columns': 'repeat(' + pipelines.length + ', 370px)' }">
+    <app-pipeline *ngFor="let pipeline of pipelines" [title]="pipeline.title">
+        <app-candidate *ngFor="let candidate of pipeline.candidates" [candidate]="candidate"></app-candidate>
+    </app-pipeline>
+</div>

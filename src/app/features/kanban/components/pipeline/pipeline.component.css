@@ -1,0 +1,21 @@
+@import "../../../../../theme/variables.css";
+
+.pipeline {
+    background-color: var(--color-clear);
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(var(--color-dark-rgb), 0.1);
+    height: calc(100vh - 56px);
+    padding-left: 16px;
+    padding-right: 8px;
+}
+
+.pipeline__header {
+    padding-bottom: 16px;
+    padding-top: 16px;
+}
+
+.pipeline .pipeline__body {
+    height: calc(100% - 64px - 16px);
+    overflow-y: scroll;
+    padding-right: 16px;
+}
