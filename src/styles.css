@@ -1,1 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+@import './theme/variables.css';
+
+* {
+    font-family: var(--font-family-base);
+    font-weight: 300;
+}
+
+html, body {
+    background-color: var(--color-border);
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+}

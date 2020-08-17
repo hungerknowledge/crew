@@ -1,0 +1,22 @@
+<div class="candidate">
+    <div class="candidate__picture">
+      <div class="picture__container">
+        <img class="picture" [src]="candidate.picture" (error)="handleImageError()" *ngIf="candidate.picture; else placeholderImage" />
+        <ng-template #placeholderImage>
+          <img class="picture--placeholder" src="../../../../../assets/icons/user.svg" />
+        </ng-template>
+      </div>
+    </div>
+    <div class="candidate__profile">
+      <span class="profile__name">{{ candidate.firstName }} {{ candidate.lastName }}</span>
+      <span class="profile__job">{{ candidate.job }}</span>
+      <div class="profile__social">
+        <button *ngFor="let network of networks" [disabled]="!candidate[network]" (click)="openNetwork(network)">
+          <img [src]="'../../../../../assets/icons/' + network + '.svg'" />
+        </button>
+      </div>
+      <div class="profile__tags" *ngIf='candidate.tags.length > 0'>
+        <span class="tag" *ngFor="let tag of candidate.tags">{{ tag }}</span>
+      </div>
+    </div>
+  </div>
