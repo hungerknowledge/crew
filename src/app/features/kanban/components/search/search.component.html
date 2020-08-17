@@ -1,0 +1,13 @@
+<div class="search">
+    <div class="search__container">
+        <input class="search__input" #searchInput (input)="showTagOptions($event)" [disabled]="autocompleteItems && autocompleteItems.length <= 0" />
+        <div class="search__selection">
+            <span class="selection" *ngFor="let item of selectedItems" (click)="remove(item)">{{ item }}</span>
+        </div>
+    </div>
+    <div class="search__autocomplete" *ngIf="filteredItems && filteredItems.length > 0">
+        <ul>
+            <li *ngFor="let item of filteredItems" (click)="select(item)">{{ item }}</li>
+        </ul>
+    </div>
+</div>

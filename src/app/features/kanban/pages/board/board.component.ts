@@ -12,6 +12,8 @@ import { Candidate, Pipeline } from '../../models';
 export class BoardComponent implements OnInit {
   candidates: Candidate[];
   pipelines: Pipeline[] = [];
+  tags: string[];
+  filteredTags: string[];
   isMobile = false;
 
   constructor(
@@ -28,7 +30,8 @@ export class BoardComponent implements OnInit {
     this.candidateService.getCandidates().subscribe({
       next: (candidates) => {
         this.candidates = candidates;
-        this.setPipelines(candidates);
+        this.pipelines = this.getPipelines(candidates);
+        this.tags = this.getTags(candidates);
       },
       error: (error) => {
         console.log('Error fetching candidates: ', error);
@@ -36,7 +39,7 @@ export class BoardComponent implements OnInit {
     });
   }
 
-  setPipelines(candidates: Candidate[]): void {
+  getPipelines(candidates: Candidate[]): Pipeline[] {
     const typesOfPipeline: string[] = candidates.map((candidate) => {
       return candidate.stage;
     })
@@ -44,13 +47,21 @@ export class BoardComponent implements OnInit {
         return list.includes(item) ? list : [...list, item];
       }, []);
 
-    this.pipelines = typesOfPipeline.map((type) => {
+    return typesOfPipeline.map((type) => {
       const candidatesForType = this.candidates.filter((candidate) => candidate.stage === type);
       return {
         title: type,
         candidates: candidatesForType
       };
     });
+  }
+
+  getTags(candidates: Candidate[]): string[] {
+    return candidates.map((candidate) => candidate.tags)
+      .reduce((list, items) => {
+        const uniqueItems = items.filter((item) => !list.includes(item));
+        return [...list, ...uniqueItems];
+      }, []);
   }
 
   dropCandidate(event: CdkDragDrop<Candidate[]>): void {
@@ -61,4 +72,11 @@ export class BoardComponent implements OnInit {
     }
   }
 
+  filterCandidates(tag: string): void {
+    this.pipelines = this.pipelines.map((pipeline) => {
+      pipeline.candidates = pipeline.candidates.filter((candidate) => candidate.tags.includes(tag));
+
+      return pipeline;
+    });
+  }
 }

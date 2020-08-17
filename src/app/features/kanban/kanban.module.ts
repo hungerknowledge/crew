@@ -7,10 +7,11 @@ import { KanbanRoutingModule } from './kanban-routing.module';
 import { BoardComponent } from './pages/board/board.component';
 import { CandidateComponent } from './components/candidate/candidate.component';
 import { PipelineComponent } from './components/pipeline/pipeline.component';
+import { SearchComponent } from './components/search/search.component';
 
 
 @NgModule({
-  declarations: [BoardComponent, CandidateComponent, PipelineComponent],
+  declarations: [BoardComponent, CandidateComponent, PipelineComponent, SearchComponent],
   imports: [
     CommonModule,
     KanbanRoutingModule,

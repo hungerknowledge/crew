@@ -1,0 +1,121 @@
+@import "../../../../../theme/variables.css";
+
+.search {
+    position: relative;
+    width: 50%;
+}
+
+.search__input {
+    border: 0;
+    border-radius: 8px;
+    box-sizing: border-box;
+    outline: none;
+    padding-bottom: 16px;
+    padding-left: 48px;
+    padding-right: 16px;
+    padding-top: 16px;
+    width: 100%;
+}
+
+.search__container {
+    position: relative;
+}
+
+.search__container:before,
+.search__container:after {
+    content: "";
+    display: block;
+    left: 16px;
+    position: absolute;
+    top: 24px;
+    transform: translateY(-50%) scale(0.8);    
+}
+
+.search__container:before {
+    background-color: var(--color-clear);
+    border: 2px solid var(--color-dark);
+    border-radius: 100%;
+    height: 16px;
+    width: 16px;
+    z-index: 1;
+}
+
+.search__container:after {
+    background-color: var(--color-dark);
+    height: 2px;
+    transform: translateY(6px) translateX(9px) rotate(45deg);
+    width: 16px;
+}
+
+.search__selection {
+    margin-top: 16px;
+}
+
+.search__selection .selection:first-child {
+    margin-left: 0;
+}
+
+.search__selection .selection {
+    background-color: var(--color-tag);
+    border-radius: 4px;
+    color: var(--color-tag-shade);
+    cursor: pointer;
+    display: inline-block;
+    margin-left: 4px;
+    margin-right: 4px;
+    padding-bottom: 4px;
+    padding-left: 8px;
+    padding-right: 24px;
+    padding-top: 4px;
+    position: relative;
+}
+
+.search__selection .selection:after,
+.search__selection .selection:before {
+    background-color: var(--color-tag-shade);
+    content: "";
+    display: block;
+    height: 2px;
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+    right: 8px;
+    width: 10px;
+}
+
+.search__selection .selection:after {
+    transform: translateY(-50%) rotate(-45deg);
+}
+
+.search__selection .selection:before {
+    transform: translateY(-50%) rotate(45deg);
+}
+
+
+.search__autocomplete {
+    background-color: var(--color-clear);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(var(--color-dark-rgb), 0.2);
+    left: 0;
+    position: absolute;
+    top: 58px;
+    width: 100%;
+    z-index: 1;
+}
+
+.search__autocomplete ul {
+    padding-left: 0;
+}
+
+.search__autocomplete ul li {
+    cursor: pointer;
+    list-style: none;
+    padding-bottom: 8px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 8px;
+}
+
+.search__autocomplete ul li:hover {
+    background-color: var(--color-clear-shade);
+}
