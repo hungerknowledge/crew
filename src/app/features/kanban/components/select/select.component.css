@@ -1,0 +1,140 @@
+@import "../../../../../theme/variables.css";
+
+.select {
+    position: relative;
+}
+
+.select .select__input {
+    background-color: var(--color-clear);
+    border: 0;
+    border-radius: 8px;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-size: var(--font-size-medium);
+    padding-bottom: 16px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 16px;
+    width: 200px;
+}
+
+.select .select__input .select__count {
+    background-color: var(--color-tag-shade);
+    border-radius: 100%;
+    color: var(--color-clear);
+    font-size: var(--font-size-small);
+    margin-left: 4px;
+    padding-left: 6px;
+    padding-right: 6px;
+}
+
+.input__container {
+    position: relative;
+    max-width: 200px;
+}
+
+.input__container:after,
+.input__container:before {
+    background-color: var(--color-dark);
+    border-radius: 8px;
+    content: "";
+    display: block;
+    height: 2px;
+    right: 16px;
+    top: 50%;
+    position: absolute;
+    width: 10px;
+}
+
+.input__container:after {
+    transform: translateX(-6px) rotate(45deg);
+}
+
+.input__container:before {
+    transform: rotate(-45deg);
+}
+
+.select.is--active .input__container:after {
+    transform: translateX(-6px) rotate(-45deg);
+}
+
+.select.is--active .input__container:before {
+    transform: rotate(45deg);
+}
+
+.select.is--active .select__options {
+    display: block;
+}
+
+.select__options {
+    background-color: var(--color-clear);
+    box-shadow: 0 4px 8px rgba(var(--color-dark-rgb), 0.2);
+    border-radius: 8px;
+    display: none;
+    margin-top: 8px;
+    padding-bottom: 16px;
+    padding-top: 16px;
+    position: absolute;
+    z-index: 1;
+}
+
+.select__options .option {
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+    display: block;
+    font-size: var(--font-size-medium);
+    outline: none;
+    padding-bottom: 8px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 8px;
+    text-align: left;
+    width: 100%;
+}
+
+.select__options .option.is--selected .checkbox:after,
+.select__options .option.is--selected .checkbox:before {
+    background-color: var(--color-clear);
+    border-radius: 8px;
+    content: "";
+    display: block;
+    height: 2px;
+    position: absolute;
+    top: 50%;
+}
+
+.select__options .option.is--selected .checkbox:after {
+    transform: translate(4px, -1px) rotate(-45deg);
+    width: 12px;
+}
+
+.select__options .option.is--selected .checkbox:before {
+    transform: rotate(45deg);
+    width: 8px;
+}
+
+.select__options .option:hover {
+    background-color: var(--color-clear-shade);
+}
+
+.select__options .option:hover .checkbox {
+    border-color: var(--color-tag-shade);
+}
+
+.select__options .option.is--selected .checkbox {
+    border-color: var(--color-tag-shade);
+    background-color: var(--color-tag-shade);
+}
+
+.select__options .option .checkbox {
+    border: 2px solid var(--color-border);
+    border-radius: 4px;
+    display: inline-block;
+    content: "";
+    height: 16px;
+    margin-right: 8px;
+    position: relative;
+    transform: translateY(4px);
+    width: 16px;
+}

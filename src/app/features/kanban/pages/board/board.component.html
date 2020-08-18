@@ -1,9 +1,20 @@
-<div class="search__container">
-    <app-search 
-    [autocompleteItems]="tags" 
-    (customSelect)="filterCandidates($event)">
-    </app-search>
+<div class="filter__container">
+    <div class="search__container">
+        <app-search 
+        [autocompleteItems]="tags" 
+        (customSelect)="filterCandidates($event)">
+        </app-search>
+    </div>
+
+    <div class="select__container">
+        <app-select 
+        label="Pipeline" 
+        [options]="pipelineOptions"
+        (customSelect)="filterPipelines($event)">
+        </app-select>
+    </div>
 </div>
+
 
 <div class="pipeline__container" cdkDropListGroup [ngStyle]="{ 'grid-template-columns': !isMobile ? 'repeat(' + pipelines.length + ', 370px)' : 'repeat(' + pipelines.length + ', 280px)' }">
     <app-pipeline 

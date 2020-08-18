@@ -1,3 +1,13 @@
+.filter__container {
+    display: flex;
+    padding-top: 32px;
+}
+
+.search__container {
+    padding-left: 32px;
+    padding-right: 32px;
+}
+
 .pipeline__container {
     display: grid;
     grid-gap: 32px;
@@ -23,10 +33,4 @@
 
 app-pipeline.cdk-drop-list-dragging app-candidate:not(.cdk-drag-placeholder) {
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-}
-
-.search__container {
-    padding-left: 32px;
-    padding-right: 32px;
-    padding-top: 32px;
 }

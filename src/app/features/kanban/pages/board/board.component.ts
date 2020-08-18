@@ -12,6 +12,7 @@ import { Candidate, Pipeline } from '../../models';
 export class BoardComponent implements OnInit {
   candidates: Candidate[];
   pipelines: Pipeline[] = [];
+  pipelineOptions: string[];
   tags: string[];
   filteredTags: string[];
   isMobile = false;
@@ -31,6 +32,7 @@ export class BoardComponent implements OnInit {
       next: (candidates) => {
         this.candidates = candidates;
         this.pipelines = this.getPipelines(candidates);
+        this.pipelineOptions = this.pipelines.map((pipeline) => pipeline.title);
         this.tags = this.getTags(candidates);
       },
       error: (error) => {
@@ -78,5 +80,15 @@ export class BoardComponent implements OnInit {
 
       return pipeline;
     });
+  }
+
+  filterPipelines(selection: string[]): void {
+    this.pipelines = this.getPipelines(this.candidates);
+
+    if (selection.length > 0) {
+      this.pipelines = this.pipelines.filter((pipeline) => {
+        return selection.includes(pipeline.title);
+      });
+    }
   }
 }

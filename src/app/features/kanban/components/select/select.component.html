@@ -1,0 +1,13 @@
+<div class="select" [ngClass]="{ 'is--active': isActive }" *ngIf="options && options.length > 0">
+    <div class="input__container" (click)="isActive = !isActive">
+        <div class="select__input">
+            {{ label }}
+            <span class="select__count" *ngIf="selectedOptions.length > 0">{{ selectedOptions.length }}</span>
+        </div>
+    </div>
+    <div class="select__options">
+        <button class="option" [ngClass]="{ 'is--selected': isSelected(option) }" (click)="select(option)" *ngFor="let option of options">
+            <span class="checkbox"></span>{{ option }}
+        </button>
+    </div>
+</div>

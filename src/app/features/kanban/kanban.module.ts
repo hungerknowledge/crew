@@ -8,10 +8,11 @@ import { BoardComponent } from './pages/board/board.component';
 import { CandidateComponent } from './components/candidate/candidate.component';
 import { PipelineComponent } from './components/pipeline/pipeline.component';
 import { SearchComponent } from './components/search/search.component';
+import { SelectComponent } from './components/select/select.component';
 
 
 @NgModule({
-  declarations: [BoardComponent, CandidateComponent, PipelineComponent, SearchComponent],
+  declarations: [BoardComponent, CandidateComponent, PipelineComponent, SearchComponent, SelectComponent],
   imports: [
     CommonModule,
     KanbanRoutingModule,
