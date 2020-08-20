@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, HostListener, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-select',
@@ -12,7 +12,13 @@ export class SelectComponent implements OnInit {
   selectedOptions: string[] = [];
   isActive = false;
 
-  constructor() { }
+  @HostListener('document:click', ['$event']) clickOutside(event): void {
+    if (!this.elementRef.nativeElement.contains(event.target)) {
+      this.isActive = false;
+    }
+  }
+
+  constructor(private elementRef: ElementRef) { }
 
   ngOnInit(): void {
   }
@@ -25,7 +31,6 @@ export class SelectComponent implements OnInit {
       this.selectedOptions.push(option);
     }
 
-    this.isActive = false;
     this.customSelect.emit(this.selectedOptions);
   }
 

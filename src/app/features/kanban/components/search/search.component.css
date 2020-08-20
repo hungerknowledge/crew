@@ -61,6 +61,7 @@
     color: var(--color-tag-shade);
     cursor: pointer;
     display: inline-block;
+    margin-bottom: 4px;
     margin-left: 4px;
     margin-right: 4px;
     padding-bottom: 4px;

@@ -6,6 +6,7 @@
 .search__container {
     padding-left: 32px;
     padding-right: 32px;
+    width: 320px;
 }
 
 .pipeline__container {

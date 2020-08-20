@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-search',
@@ -8,12 +8,18 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef }
 export class SearchComponent implements OnInit {
   @ViewChild('searchInput') searchInput: ElementRef;
   @Input() autocompleteItems: string[] = [];
-  @Output() customSelect = new EventEmitter<string>();
-  @Output() customDeselect = new EventEmitter<string>();
+  @Output() customSelect = new EventEmitter<string[]>();
 
   filteredItems: string[];
   selectedItems: string[] = [];
-  constructor() { }
+
+  @HostListener('document:click', ['$event']) clickOutside(event): void {
+    if (!this.elementRef.nativeElement.contains(event.target)) {
+      this.filteredItems = [];
+    }
+  }
+
+  constructor(private elementRef: ElementRef) { }
 
   ngOnInit(): void {
   }
@@ -33,7 +39,7 @@ export class SearchComponent implements OnInit {
   select(item: string): void {
     this.filteredItems = [];
     this.selectedItems.push(item);
-    this.customSelect.emit(item);
+    this.customSelect.emit(this.selectedItems);
 
     if (this.searchInput && this.searchInput.nativeElement && this.searchInput.nativeElement.value) {
       this.searchInput.nativeElement.value = '';
@@ -43,7 +49,7 @@ export class SearchComponent implements OnInit {
   remove(item: string): void {
     const index = this.selectedItems.indexOf(item);
     this.selectedItems.splice(index, 1);
-    this.customDeselect.emit(item);
+    this.customSelect.emit(this.selectedItems);
   }
 
 }

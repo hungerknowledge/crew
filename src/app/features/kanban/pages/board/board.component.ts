@@ -14,7 +14,8 @@ export class BoardComponent implements OnInit {
   pipelines: Pipeline[] = [];
   pipelineOptions: string[];
   tags: string[];
-  filteredTags: string[];
+  candidatesFilter: string[];
+  pipelinesFilter: string[];
   isMobile = false;
 
   constructor(
@@ -58,6 +59,10 @@ export class BoardComponent implements OnInit {
     });
   }
 
+  getPipelineCandidates(pipelineTitle: string): Candidate[] {
+    return this.candidates.filter((candidate) => candidate.stage === pipelineTitle);
+  }
+
   getTags(candidates: Candidate[]): string[] {
     return candidates.map((candidate) => candidate.tags)
       .reduce((list, items) => {
@@ -74,21 +79,56 @@ export class BoardComponent implements OnInit {
     }
   }
 
-  filterCandidates(tag: string): void {
-    this.pipelines = this.pipelines.map((pipeline) => {
-      pipeline.candidates = pipeline.candidates.filter((candidate) => candidate.tags.includes(tag));
+  filterCandidates(selection: string[]): void {
+    const pipelines = this.pipelinesFilter && this.pipelinesFilter.length > 0 ?
+      this.pipelines : this.getPipelines(this.candidates);
+    this.candidatesFilter = selection;
+    this.pipelines = this.filterCandidateByTag(selection, pipelines);
+  }
+
+  filterCandidateByTag(selection: string[], pipelines: Pipeline[]): Pipeline[] {
+    return pipelines.map((pipeline) => {
+      pipeline.candidates = pipeline.candidates.filter((candidate) => {
+        return selection.length > 0 ?
+          selection.filter((tag) => candidate.tags.includes(tag)).length === selection.length : true;
+      });
+
+      if (selection.length <= 0) {
+        pipeline.candidates = this.getPipelineCandidates(pipeline.title);
+      }
 
       return pipeline;
     });
   }
 
   filterPipelines(selection: string[]): void {
-    this.pipelines = this.getPipelines(this.candidates);
+    const pipelines = this.candidatesFilter && this.candidatesFilter.length > 0 ?
+      this.pipelines : this.getPipelines(this.candidates);
+    this.pipelinesFilter = selection;
 
     if (selection.length > 0) {
-      this.pipelines = this.pipelines.filter((pipeline) => {
+      const visibleSelection = pipelines.filter((pipeline) => selection.includes(pipeline.title));
+      this.pipelines = pipelines.filter((pipeline) => {
         return selection.includes(pipeline.title);
       });
+
+      if (visibleSelection.length !== selection.length) {
+        const selectionAdded = visibleSelection.map((pipeline) => pipeline.title);
+        const selectionToAdd = selection.filter((item) => !selectionAdded.includes(item));
+        let pipelinesToAdd = this.getPipelines(this.candidates).filter((pipeline) =>  selectionToAdd.includes(pipeline.title));
+
+        if (this.candidatesFilter && this.candidatesFilter.length > 0) {
+          pipelinesToAdd = this.filterCandidateByTag(this.candidatesFilter, pipelinesToAdd);
+        }
+
+        this.pipelines.push(...pipelinesToAdd);
+      }
+    } else {
+      if (this.candidatesFilter && this.candidatesFilter.length > 0) {
+        this.pipelines = this.filterCandidateByTag(this.candidatesFilter, this.getPipelines(this.candidates));
+      } else {
+        this.pipelines = this.getPipelines(this.candidates);
+      }
     }
   }
 }

@@ -15,7 +15,7 @@
     padding-left: 16px;
     padding-right: 16px;
     padding-top: 16px;
-    width: 200px;
+    width: 220px;
 }
 
 .select .select__input .select__count {
@@ -30,7 +30,6 @@
 
 .input__container {
     position: relative;
-    max-width: 200px;
 }
 
 .input__container:after,
@@ -76,6 +75,7 @@
     padding-top: 16px;
     position: absolute;
     z-index: 1;
+    width: 100%;
 }
 
 .select__options .option {
