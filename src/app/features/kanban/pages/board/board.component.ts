@@ -20,6 +20,7 @@ export class BoardComponent implements OnInit, AfterViewInit {
   candidatesFilter: string[];
   pipelinesFilter: string[];
   isMobile = false;
+  isCandidatesFilterActive = false;
 
   constructor(
     private candidateService: CandidateService,
@@ -106,6 +107,7 @@ export class BoardComponent implements OnInit, AfterViewInit {
       this.pipelines : this.getPipelines(this.candidates);
     this.candidatesFilter = selection;
     this.pipelines = this.filterCandidateByTag(selection, pipelines);
+    this.isCandidatesFilterActive = selection.length > 0;
   }
 
   filterCandidateByTag(selection: string[], pipelines: Pipeline[]): Pipeline[] {
@@ -152,5 +154,16 @@ export class BoardComponent implements OnInit, AfterViewInit {
         this.pipelines = this.getPipelines(this.candidates);
       }
     }
+  }
+
+  getPipelineHeight(): string {
+    const windowHeight = window.innerHeight;
+    const searchTags = this.isCandidatesFilterActive ? 48 : 0;
+
+    if (!this.isMobile) {
+      return this.filtersHeight > 0 ? `calc(100vh - ${this.filtersHeight}px - 32px)` : `calc(100vh - 56px)`;
+    }
+
+    return this.filtersHeight > 0 ? `${windowHeight - this.filtersHeight - searchTags - 80}px` : `calc(100vh - 152px)`;
   }
 }

@@ -1,31 +1,38 @@
 .filter__container {
     display: flex;
+    flex-direction: column-reverse;
+    padding-bottom: 32px;
     padding-top: 32px;
 }
 
-.search__container {
+.search__container,
+.select__container {
+    box-sizing: border-box;
     padding-left: 32px;
     padding-right: 32px;
-    width: 320px;
+    width: 100%;
+}
+
+.select__container {
+    padding-bottom: 16px;
 }
 
 .pipeline__container {
     overflow-x: scroll;
+    padding-bottom: 32px;
     width: 100%;
 }
 
 .board__grid {
     display: grid;
-    grid-gap: 32px;
     height: 100%;
     padding-left: 32px;
-    padding-top: 32px;
     width: 100%;
 }
 
 .cdk-drag-preview {
     box-sizing: border-box;
-    border-radius: 4px;
+    border-radius: var(--border-radius);
     box-shadow: 0 2px 4px rgba(var(--color-dark-rgb), 0.1);
 }
   
@@ -39,4 +46,21 @@
 
 app-pipeline.cdk-drop-list-dragging app-candidate:not(.cdk-drag-placeholder) {
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+@media (min-width: 768px) {
+    .filter__container {
+        flex-direction: row;
+    }
+
+    .search__container {
+        width: 320px;
+    }
+
+    .select__container {
+        padding-bottom: 0;
+        padding-left: 0;
+        padding-right: 0;
+        width: 220px;
+    }
 }

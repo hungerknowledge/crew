@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap');
 
 :root {
+    --border-radius: 8px;
     --color-primary: #6073E8;
     --color-text: #363561;
     --color-tag: #B9F5FB;
@@ -9,7 +10,7 @@
     --color-clear-shade: #F5FBFC;
     --color-dark: #202020;
     --color-dark-rgb: 32, 32, 32;
-    --color-border: #EFEFEF;
+    --color-border: #F3F3F3;
     --font-family-base: 'Open Sans', sans-serif;
     --font-size-extra-small: 0.6em;
     --font-size-small: 0.8em;

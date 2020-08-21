@@ -2,8 +2,9 @@
 
 .pipeline {
     background-color: var(--color-clear);
-    border-radius: 4px;
+    border-radius: var(--border-radius);
     box-shadow: 0 2px 8px rgba(var(--color-dark-rgb), 0.1);
+    margin-right: 32px;
     padding-left: 16px;
     padding-right: 8px;
 }

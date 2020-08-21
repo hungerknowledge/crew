@@ -19,13 +19,13 @@
     <div 
     class="board__grid"
     cdkDropListGroup 
-    [ngStyle]="{ 'grid-template-columns': !isMobile ? 'repeat(' + pipelines.length + ', 370px)' : 'repeat(' + pipelines.length + ', 280px)' }">
+    [ngStyle]="{ 'grid-template-columns': !isMobile ? 'repeat(' + pipelines.length + ', 402px)' : 'repeat(' + pipelines.length + ', 312px)' }">
         <app-pipeline 
         cdkDropList 
         *ngFor="let pipeline of pipelines" 
         [cdkDropListData]="pipeline.candidates" 
         [title]="pipeline.title"
-        [height]="filtersHeight > 0 ? 'calc(100vh - ' + filtersHeight + 'px - 64px)' : 'calc(100vh - 56px)'"
+        [height]="getPipelineHeight()"
         (cdkDropListDropped)="dropCandidate($event)">
             <app-candidate *ngFor="let candidate of pipeline.candidates" cdkDrag [candidate]="candidate"></app-candidate>
         </app-pipeline>
