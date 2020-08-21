@@ -161,7 +161,7 @@ export class BoardComponent implements OnInit, AfterViewInit {
     const searchTags = this.isCandidatesFilterActive ? 48 : 0;
 
     if (!this.isMobile) {
-      return this.filtersHeight > 0 ? `calc(100vh - ${this.filtersHeight}px - 32px)` : `calc(100vh - 56px)`;
+      return this.filtersHeight > 0 ? `calc(100vh - ${this.filtersHeight}px - 48px)` : `calc(100vh - 56px)`;
     }
 
     return this.filtersHeight > 0 ? `${windowHeight - this.filtersHeight - searchTags - 80}px` : `calc(100vh - 152px)`;
