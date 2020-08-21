@@ -3,7 +3,7 @@
       <div class="picture__container">
         <img class="picture" [src]="candidate.picture" (error)="handleImageError()" *ngIf="candidate.picture; else placeholderImage" />
         <ng-template #placeholderImage>
-          <img class="picture--placeholder" src="../../../../../assets/icons/user.svg" />
+          <img class="picture--placeholder" src="./assets/icons/user.svg" />
         </ng-template>
       </div>
     </div>
@@ -12,7 +12,7 @@
       <span class="profile__job">{{ candidate.job }}</span>
       <div class="profile__social">
         <button *ngFor="let network of networks" [disabled]="!candidate[network]" (click)="openNetwork(network)">
-          <img [src]="'../../../../../assets/icons/' + network + '.svg'" />
+          <img [src]="'./assets/icons/' + network + '.svg'" />
         </button>
       </div>
       <div class="profile__tags" *ngIf='candidate.tags.length > 0'>
