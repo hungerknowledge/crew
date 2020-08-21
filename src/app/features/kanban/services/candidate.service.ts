@@ -13,6 +13,6 @@ export class CandidateService {
   ) { }
 
   getCandidates(): Observable<Candidate[]> {
-    return this.httpClient.get<Candidate[]>(`https://hiring.crew.work/v1/talents?page=1&limit=30`);
+    return this.httpClient.get<Candidate[]>(`https://hiring.crew.work/v1/talents`);
   }
 }

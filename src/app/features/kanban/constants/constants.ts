@@ -9,4 +9,6 @@ export class Constants {
         '🍾 Hired',
         '⏰ Not Now',
     ];
+
+    static CANDIDATES_PER_SCROLL = 8;
 }

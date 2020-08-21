@@ -2,7 +2,7 @@
     <div class="pipeline__header">
       <span class="header__title">{{ title }}</span>
     </div>
-    <div class="pipeline__body">
+    <div class="pipeline__body" (scroll)="didScrollToBottom($event)">
       <ng-content></ng-content>
     </div>
   </div>

@@ -26,6 +26,7 @@
         [cdkDropListData]="pipeline.candidates" 
         [title]="pipeline.title"
         [height]="getPipelineHeight()"
+        (customScrollToBottom)="loadCandidates(pipeline)"
         (cdkDropListDropped)="dropCandidate($event)">
             <app-candidate *ngFor="let candidate of pipeline.candidates" cdkDrag [candidate]="candidate"></app-candidate>
         </app-pipeline>

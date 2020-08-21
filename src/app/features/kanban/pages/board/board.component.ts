@@ -59,7 +59,7 @@ export class BoardComponent implements OnInit, AfterViewInit {
       }, []);
 
     const pipelines = typesOfPipeline.map((type) => {
-      const candidatesForType = this.candidates.filter((candidate) => candidate.stage === type);
+      const candidatesForType = this.candidates.filter((candidate) => candidate.stage === type).slice(0, Constants.CANDIDATES_PER_SCROLL);
       return {
         title: type,
         candidates: candidatesForType
@@ -165,5 +165,17 @@ export class BoardComponent implements OnInit, AfterViewInit {
     }
 
     return this.filtersHeight > 0 ? `${windowHeight - this.filtersHeight - searchTags - 80}px` : `calc(100vh - 152px)`;
+  }
+
+  loadCandidates(pipeline: Pipeline): void {
+    const loadedAmount = pipeline.candidates.length;
+    const candidatesForPipeline = this.candidates.filter((candidate) => candidate.stage === pipeline.title);
+    const candidatesToAdd = candidatesForPipeline.splice(0, loadedAmount).splice(0, Constants.CANDIDATES_PER_SCROLL);
+    this.pipelines = this.pipelines.map((loadedPipeline) => {
+      if (loadedPipeline.title === pipeline.title) {
+        pipeline.candidates = [...pipeline.candidates, ...candidatesToAdd];
+      }
+      return loadedPipeline;
+    });
   }
 }
