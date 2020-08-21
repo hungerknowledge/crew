@@ -3,6 +3,7 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 import { Platform } from '@angular/cdk/platform';
 import { CandidateService } from '../../services';
 import { Candidate, Pipeline } from '../../models';
+import { Constants } from '../../constants';
 
 @Component({
   selector: 'app-board',
@@ -56,13 +57,15 @@ export class BoardComponent implements OnInit, AfterViewInit {
         return list.includes(item) ? list : [...list, item];
       }, []);
 
-    return typesOfPipeline.map((type) => {
+    const pipelines = typesOfPipeline.map((type) => {
       const candidatesForType = this.candidates.filter((candidate) => candidate.stage === type);
       return {
         title: type,
         candidates: candidatesForType
       };
     });
+
+    return this.sortPipelines(pipelines);
   }
 
   getPipelineCandidates(pipelineTitle: string): Candidate[] {
@@ -75,6 +78,19 @@ export class BoardComponent implements OnInit, AfterViewInit {
         const uniqueItems = items.filter((item) => !list.includes(item));
         return [...list, ...uniqueItems];
       }, []);
+  }
+
+  sortPipelines(pipelines: Pipeline[]): Pipeline[] {
+    const result: Pipeline[] = [];
+
+    Constants.PIPELINE_ORDER.forEach((item) => {
+      const foundPipeline = pipelines.find((pipeline) => pipeline.title === item);
+      if (foundPipeline) {
+        result.push(foundPipeline);
+      }
+    });
+
+    return result;
   }
 
   dropCandidate(event: CdkDragDrop<Candidate[]>): void {

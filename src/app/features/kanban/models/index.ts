@@ -1,2 +1,2 @@
-export { Candidate, CandidateStage, CandidateNetworks } from './candidate';
+export { Candidate, CandidateStage } from './candidate';
 export { Pipeline } from './pipeline';

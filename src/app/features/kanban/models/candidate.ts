@@ -22,8 +22,8 @@ export enum CandidateStage {
     offerSent = '📝 Offer Sent',
     onsiteInterview = '🤝 Onsite Interview',
     notNow = '⏰ Not Now',
-    reject = '⛔ Rejected',
-    hired = '🍾 Hired'
+    rejected = '⛔ Rejected',
+    hired = '🍾 Hired',
+    contacted = '👻 Contacted',
+    phoneScreen = '📞 Phone Screen'
 }
-
-export type CandidateNetworks = 'linkedin' | 'github' | 'twitter' | 'quora' | 'medium' | 'stackOverflow' | 'dribble' | 'website';
