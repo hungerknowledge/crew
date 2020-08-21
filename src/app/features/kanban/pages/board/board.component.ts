@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Platform } from '@angular/cdk/platform';
 import { CandidateService } from '../../services';
@@ -9,11 +9,13 @@ import { Candidate, Pipeline } from '../../models';
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.css']
 })
-export class BoardComponent implements OnInit {
+export class BoardComponent implements OnInit, AfterViewInit {
+  @ViewChild('filters') filters: ElementRef;
   candidates: Candidate[];
   pipelines: Pipeline[] = [];
   pipelineOptions: string[];
   tags: string[];
+  filtersHeight = 0;
   candidatesFilter: string[];
   pipelinesFilter: string[];
   isMobile = false;
@@ -26,6 +28,10 @@ export class BoardComponent implements OnInit {
   ngOnInit(): void {
     this.isMobile = this.platform.ANDROID || this.platform.IOS;
     this.fetchCandidates();
+  }
+
+  ngAfterViewInit(): void {
+    this.filtersHeight = this.filters.nativeElement.offsetHeight;
   }
 
   fetchCandidates(): void {

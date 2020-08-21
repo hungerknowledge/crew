@@ -8,6 +8,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input, ViewChild, ElementRe
 })
 export class PipelineComponent implements OnInit {
   @Input() title: string;
+  @Input() height = 'calc(100vh - 56px)';
 
   constructor() { }
 
