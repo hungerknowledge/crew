@@ -9,6 +9,7 @@ import { CandidateComponent } from './components/candidate/candidate.component';
 import { PipelineComponent } from './components/pipeline/pipeline.component';
 import { SearchComponent } from './components/search/search.component';
 import { SelectComponent } from './components/select/select.component';
+import { LoaderModule } from '../../core/components';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { SelectComponent } from './components/select/select.component';
     CommonModule,
     KanbanRoutingModule,
     DragDropModule,
-    PlatformModule
+    PlatformModule,
+    LoaderModule
   ]
 })
 export class KanbanModule { }

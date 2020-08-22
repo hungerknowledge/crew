@@ -1,35 +1,39 @@
-<div class="filter__container" #filters>
-    <div class="search__container">
-        <app-search 
-        [autocompleteItems]="tags" 
-        (customSelect)="filterCandidates($event)">
-        </app-search>
+<div class="board" *ngIf="candidates && candidates.length > 0">
+    <div class="filter__container" #filters>
+        <div class="search__container">
+            <app-search 
+            [autocompleteItems]="tags" 
+            (customSelect)="filterCandidates($event)">
+            </app-search>
+        </div>
+    
+        <div class="select__container">
+            <app-select 
+            label="Pipeline" 
+            [options]="pipelineOptions"
+            [defaultSelectedOptions]="defaultPipelineSelection"
+            (customSelect)="filterPipelines($event)">
+            </app-select>
+        </div>
     </div>
-
-    <div class="select__container">
-        <app-select 
-        label="Pipeline" 
-        [options]="pipelineOptions"
-        [defaultSelectedOptions]="defaultPipelineSelection"
-        (customSelect)="filterPipelines($event)">
-        </app-select>
+    
+    <div class="pipeline__container">
+        <div 
+        class="board__grid"
+        cdkDropListGroup 
+        [ngStyle]="{ 'grid-template-columns': !isMobile ? 'repeat(' + pipelines.length + ', 402px)' : 'repeat(' + pipelines.length + ', 312px)' }">
+            <app-pipeline 
+            cdkDropList 
+            *ngFor="let pipeline of pipelines" 
+            [cdkDropListData]="pipeline.candidates" 
+            [title]="pipeline.title"
+            [height]="getPipelineHeight()"
+            (customScrollToBottom)="loadCandidates(pipeline)"
+            (cdkDropListDropped)="dropCandidate($event)">
+                <app-candidate *ngFor="let candidate of pipeline.candidates" cdkDrag [candidate]="candidate"></app-candidate>
+            </app-pipeline>
+        </div>
     </div>
 </div>
 
-<div class="pipeline__container">
-    <div 
-    class="board__grid"
-    cdkDropListGroup 
-    [ngStyle]="{ 'grid-template-columns': !isMobile ? 'repeat(' + pipelines.length + ', 402px)' : 'repeat(' + pipelines.length + ', 312px)' }">
-        <app-pipeline 
-        cdkDropList 
-        *ngFor="let pipeline of pipelines" 
-        [cdkDropListData]="pipeline.candidates" 
-        [title]="pipeline.title"
-        [height]="getPipelineHeight()"
-        (customScrollToBottom)="loadCandidates(pipeline)"
-        (cdkDropListDropped)="dropCandidate($event)">
-            <app-candidate *ngFor="let candidate of pipeline.candidates" cdkDrag [candidate]="candidate"></app-candidate>
-        </app-pipeline>
-    </div>
-</div>
+<app-loader *ngIf="!candidates"></app-loader>
