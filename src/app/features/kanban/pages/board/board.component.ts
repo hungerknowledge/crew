@@ -21,6 +21,12 @@ export class BoardComponent implements OnInit, AfterViewInit {
   pipelinesFilter: string[];
   isMobile = false;
   isCandidatesFilterActive = false;
+  defaultPipelineSelection = [
+    '✨ New',
+    '📞 Phone Screen',
+    '🍾 Hired',
+    '⛔ Rejected'
+  ];
 
   constructor(
     private candidateService: CandidateService,
@@ -43,6 +49,7 @@ export class BoardComponent implements OnInit, AfterViewInit {
         this.pipelines = this.getPipelines(candidates);
         this.pipelineOptions = this.pipelines.map((pipeline) => pipeline.title);
         this.tags = this.getTags(candidates);
+        this.filterPipelines(this.defaultPipelineSelection);
       },
       error: (error) => {
         console.log('Error fetching candidates: ', error);

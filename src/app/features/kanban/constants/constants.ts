@@ -4,9 +4,9 @@ export class Constants {
         '📞 Phone Screen',
         '👻 Contacted',
         '🤝 Onsite Interview',
-        '⛔ Rejected',
         '📝 Offer Sent',
         '🍾 Hired',
+        '⛔ Rejected',
         '⏰ Not Now',
     ];
 

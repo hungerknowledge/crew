@@ -8,6 +8,7 @@ import { Component, OnInit, Input, Output, EventEmitter, HostListener, ElementRe
 export class SelectComponent implements OnInit {
   @Input() label: string;
   @Input() options: string[] = [];
+  @Input() defaultSelectedOptions: string[];
   @Output() customSelect = new EventEmitter<string[]>();
   selectedOptions: string[] = [];
   isActive = false;
@@ -21,6 +22,9 @@ export class SelectComponent implements OnInit {
   constructor(private elementRef: ElementRef) { }
 
   ngOnInit(): void {
+    if (this.defaultSelectedOptions && this.defaultSelectedOptions.length > 0) {
+      this.selectedOptions = this.defaultSelectedOptions;
+    }
   }
 
   select(option: string): void {
