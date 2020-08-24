@@ -39,7 +39,7 @@ export class BoardComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.filtersHeight = this.filters.nativeElement.offsetHeight;
+    this.filtersHeight = this.filters && this.filters.nativeElement ? this.filters.nativeElement.offsetHeight : 0;
   }
 
   fetchCandidates(): void {
@@ -175,12 +175,14 @@ export class BoardComponent implements OnInit, AfterViewInit {
   }
 
   loadCandidates(pipeline: Pipeline): void {
-    const loadedAmount = pipeline.candidates.length;
     const candidatesForPipeline = this.candidates.filter((candidate) => candidate.stage === pipeline.title);
-    const candidatesToAdd = candidatesForPipeline.splice(0, loadedAmount).splice(0, Constants.CANDIDATES_PER_SCROLL);
+    const candidatesToAdd = candidatesForPipeline.filter((candidate) => {
+      return !pipeline.candidates.includes(candidate);
+    }).splice(0, Constants.CANDIDATES_PER_SCROLL);
+
     this.pipelines = this.pipelines.map((loadedPipeline) => {
       if (loadedPipeline.title === pipeline.title) {
-        pipeline.candidates = [...pipeline.candidates, ...candidatesToAdd];
+        loadedPipeline.candidates = [...loadedPipeline.candidates, ...candidatesToAdd];
       }
       return loadedPipeline;
     });
